@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard | Wonderland Hotel</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: url('https://plus.unsplash.com/premium_photo-1661881436846-5a0f53025711?fm=jpg&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aG90ZWwlMjBsb2JieXxlbnwwfHwwfHx8MA%3D%3D&ixlib=rb-4.1.0&q=60&w=3000') no-repeat center center/cover;
+      color: #fff;
+    }
+
+    .dashboard-container {
+      background-color: rgba(0, 0, 0, 0.6);
+      margin: 50px auto;
+      padding: 30px;
+      width: 90%;
+      max-width: 600px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 0 15px rgba(0,0,0,0.7);
+    }
+
+    h2 {
+      font-size: 2rem;
+      color: #FFD700;
+    }
+
+    .stats-card {
+      margin-top: 30px;
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 15px;
+    }
+
+    .stats-card p {
+      font-size: 1.3rem;
+      margin: 15px 0;
+      color: #fff;
+    }
+
+    .icon {
+      width: 60px;
+      vertical-align: middle;
+      margin-right: 10px;
+    }
+
+    .stat-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard-container">
+    <h2>Admin Dashboard</h2>
+    <div id="stats" class="stats-card">
+      <p>Loading statistics...</p>
+    </div>
+  </div>
+
+  <script>
+    const users = JSON.parse(localStorage.getItem('users') || '[]');
+    const bookings = JSON.parse(localStorage.getItem('bookings') || '[]');
+    const customerCount = users.filter(u => u.role === 'customer').length;
+
+    document.getElementById('stats').innerHTML = `
+      <div class="stat-item">
+        <img src="https://cdn-icons-png.flaticon.com/512/3126/3126647.png" alt="Customers" class="icon">
+        <p>Total Customers: ${customerCount}</p>
+      </div>
+      <div class="stat-item">
+        <img src="https://cdn-icons-png.flaticon.com/512/809/809521.png" alt="Rooms Booked" class="icon">
+        <p>Rooms Booked: ${bookings.length}</p>
+      </div>
+    `;
+  </script>
+</body>
+</html>

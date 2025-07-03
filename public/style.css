@@ -1,0 +1,12 @@
+body {
+  font-family: Arial;
+  padding: 20px;
+  background: #f0f4f8;
+}
+h1, h2 {
+  color: #2a2a72;
+}
+form input, form select, form button {
+  margin: 5px;
+  padding: 10px;
+}

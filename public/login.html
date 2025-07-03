@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login | Hotel Wonderland</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: url('https://images.unsplash.com/photo-1576671081837-d0efb6b31a7e') no-repeat center center/cover;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .login-box {
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+      width: 400px;
+      max-width: 90%;
+      text-align: center;
+    }
+
+    .login-box h2 {
+      margin-bottom: 25px;
+      color: #333;
+    }
+
+    .login-box label {
+      float: left;
+      margin: 10px 0 5px;
+      color: #333;
+      font-weight: 600;
+    }
+
+    .login-box input,
+    .login-box select,
+    .login-box button {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+
+    .login-box input:focus,
+    .login-box select:focus {
+      border-color: #28a745;
+      outline: none;
+    }
+
+    .login-box button {
+      background-color: #28a745;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .login-box button:hover {
+      background-color: #218838;
+    }
+
+    .logo {
+      width: 60px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <img src="https://cdn-icons-png.flaticon.com/512/235/235889.png" class="logo" alt="Hotel Logo">
+    <h2>Login to Hotel Wonderland</h2>
+    <form id="loginForm">
+      <label for="role">Select Role</label>
+      <select name="role" required>
+        <option value="">-- Choose Role --</option>
+        <option value="customer">Customer</option>
+        <option value="admin">Admin</option>
+      </select>
+
+      <label for="username">Username</label>
+      <input type="text" name="username" placeholder="Enter your username" required>
+
+      <label for="email">Email</label>
+      <input type="email" name="email" placeholder="Enter your email" required>
+
+      <label for="phone">Phone Number</label>
+      <input type="tel" name="phone" placeholder="Enter your phone number" required>
+
+      <button type="submit">Login</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const role = e.target.role.value;
+      const username = e.target.username.value.trim();
+      const email = e.target.email.value.trim();
+      const phone = e.target.phone.value.trim();
+
+      const user = { role, username, email, phone };
+
+      // Save current user
+      localStorage.setItem('currentUser', JSON.stringify(user));
+
+      // Save to user list
+      const users = JSON.parse(localStorage.getItem('users') || '[]');
+      users.push(user);
+      localStorage.setItem('users', JSON.stringify(users));
+
+      // Redirect based on role
+      if (role === 'admin') {
+        window.location.href = 'dashboard_admin.html';
+      } else {
+        window.location.href = 'dashboard_customer.html';
+      }
+    });
+  </script>
+</body>
+</html>
